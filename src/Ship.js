@@ -2,6 +2,7 @@ class Ship {
   constructor(itinerary) {
     this.itinerary = itinerary
     this.currentPort = itinerary.ports[0]
+    this.currentPort.addShip(this)
     this.previousPort = null
   }
   setSail() {
@@ -17,6 +18,7 @@ class Ship {
       throw new Error("The ship has arrived at its final destination")
     }
 
+    this.currentPort.removeShip(this)
     this.previousPort = this.currentPort
     this.currentPort = null
   }
@@ -33,6 +35,7 @@ class Ship {
       throw new Error("The ship has arrived at its final destination")
     }
     this.currentPort = this.itinerary.ports.at(indexOfNextPort)
+    this.currentPort.addShip(this)
   }
 }
 

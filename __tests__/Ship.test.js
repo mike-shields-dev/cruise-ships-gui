@@ -39,6 +39,12 @@ describe("Ship", () => {
     expect(ship.currentPort).toBe(firstPort)
   })
 
+  it("ship gets added to ships array of currentPort at instantiation", () => {
+    const ship = new Ship(itinerary)
+
+    expect(firstPort.ships).toContain(ship)
+  })
+
   it("has a setSail method", () => {
     const ship = new Ship(itinerary)
 
@@ -58,6 +64,34 @@ describe("Ship", () => {
     ship.setSail()
 
     expect(ship.currentPort).toBeNull()
+  })
+
+  it("setSail removes ship from ports array of previousPort", () => {
+    const ship = new Ship(itinerary)
+
+    ship.setSail()
+
+    expect(firstPort.ships).not.toContain(ship)
+  })
+
+  it("ship can't setSail when at last port in itinerary", () => {
+    const ship = new Ship(itinerary)
+
+    expect(ship.currentPort).toBe(firstPort)
+
+    ship.setSail()
+    ship.dock()
+
+    expect(ship.currentPort).toBe(secondPort)
+
+    ship.setSail()
+    ship.dock()
+
+    expect(ship.currentPort).toBe(lastPort)
+
+    expect(() => ship.setSail()).toThrowError(
+      "The ship has arrived at its final destination"
+    )
   })
 
   it("has a dock method", () => {
@@ -81,21 +115,12 @@ describe("Ship", () => {
     expect(ship.currentPort).toBe(secondPort)
   })
 
-  it("can't sail further than the last port", () => {
+  it("dock adds ship to ships array of currentPort", () => {
     const ship = new Ship(itinerary)
 
-    expect(ship.currentPort).toBe(firstPort)
-
     ship.setSail()
     ship.dock()
 
-    expect(ship.currentPort).toBe(secondPort)
-
-    ship.setSail()
-    ship.dock()
-
-    expect(ship.currentPort).toBe(lastPort)
-
-    expect(() => ship.setSail()).toThrowError("The ship has arrived at its final destination")
+    expect(secondPort.ships).toContain(ship)
   })
 })
