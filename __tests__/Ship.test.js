@@ -1,6 +1,4 @@
 const { Ship } = require("../src/Ship")
-const { Port } = require("../src/Port")
-const { Itinerary } = require("../src/Itinerary")
 
 describe("Ship", () => {
   describe("with ports and an itinerary", () => {
@@ -10,7 +8,7 @@ describe("Ship", () => {
       firstPort = { addShip: jest.fn(), removeShip: jest.fn() }
       secondPort = { addShip: jest.fn(), removeShip: jest.fn() }
       lastPort = { addShip: jest.fn(), removeShip: jest.fn() }
-      itinerary = new Itinerary([firstPort, secondPort, lastPort])
+      itinerary = { ports: [firstPort, secondPort, lastPort] }
       ship = new Ship(itinerary)
     })
 
