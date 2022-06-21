@@ -1,4 +1,4 @@
-const { Port } = require("../src/Port")
+const Port = require("../src/Port")
 
 describe("Port", () => {
   let port, ship1, ship2
