@@ -31,10 +31,10 @@ describe("Port", () => {
   })
 
   it("addShip adds the given ship to the ships array", () => {
-    const ship = jest.fn()
-    port.addShip(ship)
+    const ship1 = jest.fn()
+    port.addShip(ship1)
 
-    expect(port.ships).toContain(ship)
+    expect(port.ships).toContain(ship1)
   })
 
   it("has removeShip method", () => {
@@ -46,11 +46,9 @@ describe("Port", () => {
   })
 
   it("removeShip removes the given ship from the ships array", () => {
-    const ship1 = jest.fn()
-    const ship2 = jest.fn()
-
     port.addShip(ship1)
     port.addShip(ship2)
+    
     port.removeShip(ship1)
 
     expect(port.ships).not.toContain(ship1)
