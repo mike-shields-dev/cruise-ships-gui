@@ -21,6 +21,18 @@
     })()
   }
 
+  Controller.prototype.renderPorts = function renderPorts(ports) {
+    const portsEl = document.querySelector("#ports")
+    portsEl.style.width = `${ports.length * 256}px`
+
+    ports.forEach((port, index) => {
+      const portEl = document.createElement("div")
+      portEl.className = "port"
+      portEl.dataset.portIndex = index
+      portsEl.appendChild(portEl)
+    })
+  }
+
   if (typeof module !== "undefined" && module.exports) {
     module.exports = Controller
   } else {
