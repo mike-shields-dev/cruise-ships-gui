@@ -5,8 +5,8 @@ describe("Port", () => {
 
   beforeEach(() => {
     port = new Port("Liverpool")
-    ship1 = {}
-    ship2 = {}
+    ship1 = jest.fn()
+    ship2 = jest.fn()
   })
 
   it("can be instantiated", () => {
@@ -31,7 +31,7 @@ describe("Port", () => {
   })
 
   it("addShip adds the given ship to the ships array", () => {
-    const ship = {}
+    const ship = jest.fn()
     port.addShip(ship)
 
     expect(port.ships).toContain(ship)
@@ -46,8 +46,8 @@ describe("Port", () => {
   })
 
   it("removeShip removes the given ship from the ships array", () => {
-    const ship1 = {}
-    const ship2 = {}
+    const ship1 = jest.fn()
+    const ship2 = jest.fn()
 
     port.addShip(ship1)
     port.addShip(ship2)
