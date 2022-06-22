@@ -33,6 +33,27 @@
     })
   }
 
+  Controller.prototype.positionShip = function positionShip(ship) {
+    const indexOfCurrentPort = ship.itinerary.ports.findIndex(
+      (port) => port.name === ship.currentPort.name
+    )
+
+    const portEl = document.querySelector(
+      `.port[data-port-index="${indexOfCurrentPort}"]`
+    )
+
+    const { offsetLeft, offsetTop } = portEl
+    const portElOffsetTop = portEl.offsetTop
+    const shipEl = document.querySelector("#ship")
+    const { 
+      width: shipElWidth, 
+      height: shipElHeight 
+    } = getComputedStyle(shipEl) 
+
+    shipEl.style.top = `${offsetTop + parseInt(shipElHeight) / 2}px`
+    shipEl.style.left = `${offsetLeft - parseInt(shipElWidth) / 4}px`
+  }
+
   if (typeof module !== "undefined" && module.exports) {
     module.exports = Controller
   } else {

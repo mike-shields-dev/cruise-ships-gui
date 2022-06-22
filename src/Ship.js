@@ -19,7 +19,7 @@
         throw new Error("The ship has arrived at its final destination")
       }
 
-      this.currentPort.removeShip(this)
+      this.currentPort.positionShip(this)
       this.previousPort = this.currentPort
       this.currentPort = null
     }

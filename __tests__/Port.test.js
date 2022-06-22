@@ -37,19 +37,19 @@ describe("Port", () => {
     expect(port.ships).toContain(ship1)
   })
 
-  it("has removeShip method", () => {
-    expect(port.removeShip).toBeInstanceOf(Function)
+  it("has positionShip method", () => {
+    expect(port.positionShip).toBeInstanceOf(Function)
   })
 
-  it("removeShip throws an error if the ships array is empty", () => {
-    expect(() => port.removeShip()).toThrowError("No ships to remove")
+  it("positionShip throws an error if the ships array is empty", () => {
+    expect(() => port.positionShip()).toThrowError("No ships to remove")
   })
 
-  it("removeShip removes the given ship from the ships array", () => {
+  it("positionShip removes the given ship from the ships array", () => {
     port.addShip(ship1)
     port.addShip(ship2)
-    
-    port.removeShip(ship1)
+
+    port.positionShip(ship1)
 
     expect(port.ships).not.toContain(ship1)
     expect(port.ships).toContain(ship2)
