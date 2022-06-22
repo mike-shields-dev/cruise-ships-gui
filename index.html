@@ -5,29 +5,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Press+Start+2P&display=swap"
+  rel="stylesheet">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Cruise Ships</title>
 </head>
 
 <body>
-  <div id="viewport">
+  <div id="viewport" class="scrollbar-hidden">
     <div id="ports"></div>
-    <div id="ship"></div>
+    <div id="ship" class="rocker">
+      <div id="ship-inner" class="bobber">
+
+      </div>
+    </div>
   </div>
+  <button id="sail-button">Set Sail!</button>
 
   <script src="./src/Controller.js"></script>
   <script src="/src/Port.js"></script>
   <script src="/src/Itinerary.js"></script>
   <script src="/src/Ship.js"></script>
   <script>
-    const controller = new Controller()
     const itinerary = new Itinerary([
       new Port("Liverpool"),
       new Port("Dublin"),
-      new Port("New York")
+      new Port("New York"), 
+      new Port("Florida"), 
+      new Port("Jamaica")
     ])
     const ship = new Ship(itinerary)
+    const controller = new Controller(ship)
 
     controller.renderPorts(itinerary.ports)
     controller.positionShip(ship)

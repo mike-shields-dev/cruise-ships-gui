@@ -1,10 +1,15 @@
 ;(function () {
-  function Controller() {
+  function Controller(ship) {
+    this.ship = ship
+    this.shipEl = document.querySelector("#ship")
+    this.viewportEl = document.querySelector("#viewport")
+    this.setSailButton = document.querySelector("#sail-button")
+    this.setSailButton.addEventListener("click", () => this.setSail())
     this.initialiseSea()
+    this.initialiseScrollTracking()
   }
 
   Controller.prototype.initialiseSea = function initialiseSea() {
-    const viewport = document.querySelector("#viewport")
     const waterImages = ["../images/water0.png", "../images/water1.png"]
     const animationInterval = 1000
     let waterImageIndex = 0
@@ -14,7 +19,7 @@
       const currentTime = Date.now()
       if (currentTime - timeStamp > animationInterval) {
         timeStamp = currentTime
-        viewport.style.backgroundImage = `url(${waterImages[waterImageIndex]})`
+        this.viewport.style.backgroundImage = `url(${waterImages[waterImageIndex]})`
         waterImageIndex = ++waterImageIndex % waterImages.length
       }
       requestAnimationFrame(step)
@@ -33,9 +38,9 @@
     })
   }
 
-  Controller.prototype.positionShip = function positionShip(ship) {
-    const indexOfCurrentPort = ship.itinerary.ports.findIndex(
-      (port) => port.name === ship.currentPort.name
+  Controller.prototype.positionShip = function positionShip() {
+    const indexOfCurrentPort = this.ship.itinerary.ports.findIndex(
+      (port) => port.name === this.ship.currentPort.name
     )
 
     const portEl = document.querySelector(
@@ -45,14 +50,38 @@
     const { offsetLeft, offsetTop } = portEl
     const portElOffsetTop = portEl.offsetTop
     const shipEl = document.querySelector("#ship")
-    const { 
-      width: shipElWidth, 
-      height: shipElHeight 
-    } = getComputedStyle(shipEl) 
+    const { width: shipElWidth, height: shipElHeight } =
+      getComputedStyle(shipEl)
 
     shipEl.style.top = `${offsetTop + parseInt(shipElHeight) / 2}px`
     shipEl.style.left = `${offsetLeft - parseInt(shipElWidth) / 4}px`
   }
+
+  Controller.prototype.setSail = function setSail() {
+    this.ship.setSail()
+    this.ship.dock()
+    this.positionShip()
+  }
+
+  Controller.prototype.initialiseScrollTracking =
+    function initialiseScrollTracking(
+      shipEl = this.shipEl,
+      viewportEl = this.viewportEl
+    ) {
+      let shipElPrevOffset = null
+
+      const trackScroll = () =>  {
+        const { left: shipElNextOffset } = getComputedStyle(shipEl)        
+        if (shipElPrevOffset !== shipElNextOffset) {
+          viewportEl.scrollTo({
+            left: parseInt(shipElNextOffset) - 10,
+          })
+          shipElPrevOffset = shipElNextOffset
+        }
+        requestAnimationFrame(trackScroll)
+      }
+      requestAnimationFrame(trackScroll)
+    }
 
   if (typeof module !== "undefined" && module.exports) {
     module.exports = Controller
