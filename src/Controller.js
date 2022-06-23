@@ -68,10 +68,10 @@
       shipEl = this.shipEl,
       viewportEl = this.viewportEl
     ) {
-      let shipElPrevOffset = null
+      let shipElPrevOffset
 
-      const trackScroll = () =>  {
-        const { left: shipElNextOffset } = getComputedStyle(shipEl)        
+      const trackScroll = () => {
+        const { left: shipElNextOffset } = getComputedStyle(shipEl)
         if (shipElPrevOffset !== shipElNextOffset) {
           viewportEl.scrollTo({
             left: parseInt(shipElNextOffset) - 10,
