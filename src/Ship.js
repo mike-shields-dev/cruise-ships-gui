@@ -6,6 +6,7 @@
       this.currentPort.addShip(this)
       this.previousPort = null
       this.isSailing = false
+      this.hasCompletedItinerary = false
     }
     setSail() {
       if (!this.currentPort) {

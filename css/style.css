@@ -1,7 +1,8 @@
 :root {
   --viewport-width: 640px;
-  --rocker-angle: 1.5deg;
-  --bobber-height: 2px;
+  --rocker-angle: 3deg;
+  --bobber-distance: 2px;
+  --shifter-distance: 2px;
 }
 
 body {
@@ -13,6 +14,14 @@ body {
   height: 100vh;
   font-family: "Press Start 2P";
   color: #fff;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #viewport {
@@ -59,27 +68,36 @@ body {
   background-image: url("../images/ship.png");
 }
 
-.rocker {
+.rock {
   transform-origin: center;
-  animation: rocker-animation 2s infinite ease-in-out calc(2s / 3);
+  animation: rocker 2s infinite ease-in-out calc(2s / 3);
 }
 
-@keyframes rocker-animation {
+@keyframes rocker {
   0%   { transform: rotate(var(--rocker-angle)) }
   50%  { transform: rotate(calc(-1 * var(--rocker-angle))) }
   100% { transform: rotate(var(--rocker-angle)) }
 }
 
-.bobber { 
-  animation: bobber-animation 2s infinite ease-in-out;
+.bob { 
+  animation: bobber 2s infinite ease-in-out;
 }
 
-@keyframes bobber-animation {
+@keyframes bobber {
   0%   { transform: translateY(0px) }
-  50%  { transform: translateY(var(--bobber-height)) }
+  50%  { transform: translateY(var(--bobber-distance)) }
   100% { transform: translateY(0px) }
 }
 
+.shift {
+  animation: shifter 5s infinite ease-in-out;
+}
+
+@keyframes shifter {
+  0%   { transform: translateX(0px) }
+  50%  { transform: translateX(var(--shifter-distance)) }
+  100% { transform: translateX(0px) }
+}
 
 #ui-container {
   display: grid;
@@ -96,9 +114,6 @@ body {
 }
 
 #sail-button {
-  bottom: 0;
-  width: var(--viewport-width);
-  height: 2rem;
   background: #f00;
   border: none;
   color: currentColor;

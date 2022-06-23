@@ -5,9 +5,9 @@ describe("Ship", () => {
     let firstPort, secondPort, lastPort, itinerary, ship
 
     beforeEach(() => {
-      firstPort = { addShip: jest.fn(), positionShip: jest.fn() }
-      secondPort = { addShip: jest.fn(), positionShip: jest.fn() }
-      lastPort = { addShip: jest.fn(), positionShip: jest.fn() }
+      firstPort = { addShip: jest.fn(), removeShip: jest.fn() }
+      secondPort = { addShip: jest.fn(), removeShip: jest.fn() }
+      lastPort = { addShip: jest.fn(), removeShip: jest.fn() }
       itinerary = { ports: [firstPort, secondPort, lastPort] }
       ship = new Ship(itinerary)
     })
@@ -53,7 +53,7 @@ describe("Ship", () => {
 
     it("setSail removes ship from ports array of previousPort", () => {
       ship.setSail()
-      expect(firstPort.positionShip).toHaveBeenCalledWith(ship)
+      expect(firstPort.removeShip).toHaveBeenCalledWith(ship)
     })
 
     it("ship can't setSail when at last port in itinerary", () => {

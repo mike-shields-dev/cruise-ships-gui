@@ -5,16 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Press+Start+2P&display=swap"
-  rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Press+Start+2P&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Cruise Ships</title>
 </head>
 
 <body>
+  <header>
+    <p>Current Port: <span id="current-port"></span></p>
+    <p>Next Port: <span id="next-port"></span></p>
+  </header>
   <div id="viewport" class="scrollbar-hidden">
     <div id="ports"></div>
     <div id="ship" class="shift">
@@ -36,9 +40,9 @@
     const itinerary = new Itinerary([
       new Port("Liverpool"),
       new Port("Dublin"),
-      new Port("New York"),
-      new Port("Florida"),
-      new Port("Jamaica")
+      // new Port("New York"),
+      // new Port("Florida"),
+      // new Port("Jamaica")
     ])
     const ship = new Ship(itinerary)
     const controller = new Controller(ship)

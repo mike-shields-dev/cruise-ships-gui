@@ -7,12 +7,20 @@
     this.shipEl = document.querySelector("#ship")
     this.shipEl.addEventListener("transitionstart", () => {
       this.renderMessage(`🧭 Departed from ${this.ship.previousPort.name} 🧭`)
+      this.shipEl.className = "rock"
+      this.shipEl.children[0].className = "bob"
       this.ship.isSailing = true
     })
 
     this.shipEl.addEventListener("transitionend", () => {
       this.renderMessage(`⚓ Arrived at ${this.ship.currentPort.name} ⚓`)
+      if (this.ship.currentPort === this.ship.itinerary.ports.at(-1)) {
+        this.ship.hasCompletedItinerary = true
+      }
+      this.shipEl.className = "shift"
+      this.shipEl.children[0].className = "bob"
       this.ship.isSailing = false
+      this.updateHeader()
     })
 
     this.viewportEl = document.querySelector("#viewport")
@@ -28,10 +36,13 @@
         this.setSailButton.textContent = "Set Sail!"
       }
     })
-    this.setSailButton = document.querySelector("#sail-button")
-    this.setSailButton.addEventListener("click", () => this.setSail())
+
+    this.currentPortEl = document.querySelector('#current-port')
+    this.nextPortEl = document.querySelector('#next-port')
+
     this.initialiseSea()
     this.initialiseScrollTracking()
+    this.updateHeader()
   }
 
   Controller.prototype.initialiseSea = function initialiseSea() {
@@ -113,6 +124,21 @@
     this.messageEl.style.opacity = 1
 
     setTimeout(() => (this.messageEl.style.opacity = 0), 2000)
+  }
+
+  Controller.prototype.updateHeader = function updateHeader() {
+    this.currentPortEl.textContent = this.ship.currentPort.name
+    const currentPortIndex = this.ship.itinerary.ports.findIndex(
+      (port) => port.name === this.ship.currentPort.name
+    )
+    const nextPortIndex = currentPortIndex + 1
+    const nextPort = this.ship.itinerary.ports.at(nextPortIndex)
+
+    if(nextPort) {
+      this.nextPortEl.textContent = nextPort.name
+    } else {
+      this.nextPortEl.textContent = "-------------"
+    }
   }
 
   if (typeof module !== "undefined" && module.exports) {
