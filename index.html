@@ -61,7 +61,13 @@
 
     addPortButton.addEventListener('click', (e) => {
       e.preventDefault()
-      const portName = form.port.value.toLowerCase()
+      const portName = 
+        form.port.value
+          .toLowerCase()
+          .split(" ").map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
+          .join(" ")
+          .trim()
+
       if (!portName || portNames.includes(portName)) {
         alert('Port already exists')
         return 
@@ -81,12 +87,12 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (portNames.length < 2) {
-        return alert('You must add at least two ports')
-      }
-      itinerary = new Itinerary(portNames.map(portName => new Port(portName)))
-      portNames = []
+        alert('You must add at least two ports')
+        return
+      } 
       form.port.value = ""
-      itineraryListEl.textContent = ""
+      console.log({portNames});
+      itinerary = new Itinerary(portNames.map(portName => new Port(portName)))
       ship = new Ship(itinerary)
       controller = new Controller(ship)
 
