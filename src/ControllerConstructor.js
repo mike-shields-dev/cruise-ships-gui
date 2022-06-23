@@ -28,6 +28,7 @@
     this.messageEl = document.querySelector("#message")
     this.messageEl.addEventListener("transitionend", () => {
       if(this.ship.hasCompletedItinerary) {
+        [...form.elements].forEach(el => el.disabled = false)
         this.setSailButton.textContent = "🏁 Your cruise is complete! 🏁"
         this.setSailButton.disabled = true
       } else if (this.ship.isSailing) {
