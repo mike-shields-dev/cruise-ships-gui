@@ -1,6 +1,9 @@
 ;(function () {
   function Controller(ship) {
     this.ship = ship
+    this.setSailButton = document.querySelector("#sail-button")
+    this.setSailButton.addEventListener("click", () => this.setSail())
+
     this.shipEl = document.querySelector("#ship")
     this.viewportEl = document.querySelector("#viewport")
     this.setSailButton = document.querySelector("#sail-button")
