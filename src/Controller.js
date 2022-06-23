@@ -40,27 +40,10 @@
     this.currentPortEl = document.querySelector('#current-port')
     this.nextPortEl = document.querySelector('#next-port')
 
-    this.initialiseSea()
     this.initialiseScrollTracking()
     this.updateHeader()
   }
 
-  Controller.prototype.initialiseSea = function initialiseSea() {
-    const waterImages = ["../images/water0.png", "../images/water1.png"]
-    const animationInterval = 1000
-    let waterImageIndex = 0
-    let timeStamp = Date.now()
-
-    ;(function step() {
-      const currentTime = Date.now()
-      if (currentTime - timeStamp > animationInterval) {
-        timeStamp = currentTime
-        this.viewport.style.backgroundImage = `url(${waterImages[waterImageIndex]})`
-        waterImageIndex = ++waterImageIndex % waterImages.length
-      }
-      requestAnimationFrame(step)
-    })()
-  }
 
   Controller.prototype.renderPorts = function renderPorts(ports) {
     const portsEl = document.querySelector("#ports")

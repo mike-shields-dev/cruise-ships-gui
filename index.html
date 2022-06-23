@@ -16,8 +16,22 @@
 
 <body>
   <header>
-    <p>Current Port: <span id="current-port"></span></p>
-    <p>Next Port: <span id="next-port"></span></p>
+    <form>
+      <label for="port">Add Port</label>
+      <input type="text" name="port" placeholder="Port Name" required>
+      <div id="form-buttons">
+        <button id="add-port-button">Add</button>
+        <button id="book-button" type="submit">Book</button>
+      </div>
+      <p>Itinerary</p>
+      <div id="itinerary-list"></div>
+    </form>
+
+    <div id="journey-status">
+      <p>Current Port: <span id="current-port"></span></p>
+      <p>Next Port: <span id="next-port"></span></p>
+    </div>
+
   </header>
   <div id="viewport" class="scrollbar-hidden">
     <div id="ports"></div>
@@ -37,18 +51,49 @@
   <script src="/src/Itinerary.js"></script>
   <script src="/src/Ship.js"></script>
   <script>
-    const itinerary = new Itinerary([
-      new Port("Liverpool"),
-      new Port("Dublin"),
-      // new Port("New York"),
-      // new Port("Florida"),
-      // new Port("Jamaica")
-    ])
-    const ship = new Ship(itinerary)
-    const controller = new Controller(ship)
+    let portNames = []
+    let itinerary
+    let ship
+    let controller
+    const form = document.querySelector('form')
+    const addPortButton = document.querySelector('#add-port-button')
+    const itineraryListEl = document.querySelector('#itinerary-list')
 
-    controller.renderPorts(itinerary.ports)
-    controller.positionShip(ship)
+    addPortButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      const portName = form.port.value.toLowerCase()
+      if (!portName || portNames.includes(portName)) {
+        alert('Port already exists')
+        return 
+      } else {
+        portNames.push(portName)
+      }
+
+      itineraryListEl.innerHTML = ''
+      portNames.forEach(portName => {
+        const portNameEl = document.createElement('p')
+        portNameEl.innerText = portName
+        itineraryListEl.appendChild(portNameEl)
+      })
+    })
+
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (portNames.length < 2) {
+        return alert('You must add at least two ports')
+      }
+      itinerary = new Itinerary(portNames.map(portName => new Port(portName)))
+      portNames = []
+      form.port.value = ""
+      itineraryListEl.textContent = ""
+      ship = new Ship(itinerary)
+      controller = new Controller(ship)
+
+      controller.renderPorts(itinerary.ports)
+      controller.positionShip(ship)
+    })
+
   </script>
 </body>
 
