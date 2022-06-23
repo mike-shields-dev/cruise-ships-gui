@@ -28,7 +28,7 @@
 
   Controller.prototype.renderPorts = function renderPorts(ports) {
     const portsEl = document.querySelector("#ports")
-    portsEl.style.width = `${ports.length * 256}px`
+    portsEl.style.width = `${ports.length * 600}px`
 
     ports.forEach((port, index) => {
       const portEl = document.createElement("div")
