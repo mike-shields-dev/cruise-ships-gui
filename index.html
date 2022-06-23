@@ -17,13 +17,16 @@
 <body>
   <div id="viewport" class="scrollbar-hidden">
     <div id="ports"></div>
-    <div id="ship" class="rocker">
-      <div id="ship-inner" class="bobber">
+    <div id="ship" class="shift">
+      <div id="ship-inner" class="bob">
 
       </div>
     </div>
   </div>
-  <button id="sail-button">Set Sail!</button>
+  <div id="ui-container">
+    <button id="sail-button">Set Sail!</button>
+    <p id="message"></p>
+  </div>
 
   <script src="./src/Controller.js"></script>
   <script src="/src/Port.js"></script>
@@ -33,8 +36,8 @@
     const itinerary = new Itinerary([
       new Port("Liverpool"),
       new Port("Dublin"),
-      new Port("New York"), 
-      new Port("Florida"), 
+      new Port("New York"),
+      new Port("Florida"),
       new Port("Jamaica")
     ])
     const ship = new Ship(itinerary)

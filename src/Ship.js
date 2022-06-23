@@ -5,6 +5,7 @@
       this.currentPort = itinerary.ports[0]
       this.currentPort.addShip(this)
       this.previousPort = null
+      this.isSailing = false
     }
     setSail() {
       if (!this.currentPort) {
@@ -19,7 +20,7 @@
         throw new Error("The ship has arrived at its final destination")
       }
 
-      this.currentPort.positionShip(this)
+      this.currentPort.removeShip(this)
       this.previousPort = this.currentPort
       this.currentPort = null
     }

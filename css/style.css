@@ -50,7 +50,7 @@ body {
   width: 128px;
   height: 64px;
   position: absolute;
-  transition: all 3s ease-in-out;
+  transition: all 8s ease-in-out;
 }
 
 #ship-inner {
@@ -80,6 +80,21 @@ body {
   100% { transform: translateY(0px) }
 }
 
+
+#ui-container {
+  display: grid;
+  height: 2rem;
+  width: var(--viewport-width);
+}
+
+#sail-button, 
+#message {
+  grid-area: 1 / 1 / -1 / -1;
+  margin: 0;
+  height: inherit;
+  width: inherit;
+}
+
 #sail-button {
   bottom: 0;
   width: var(--viewport-width);
@@ -87,4 +102,15 @@ body {
   background: #f00;
   border: none;
   color: currentColor;
+}
+
+#message {
+  display: grid;
+  place-content: center;
+  background: #fff;
+  color: black;
+  box-shadow: 0 0 1px 2px #000 inset;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }

@@ -7,7 +7,7 @@
     addShip(ship) {
       this.ships.push(ship)
     }
-    positionShip(shipToRemove) {
+    removeShip(shipToRemove) {
       if (this.ships.length === 0) {
         throw new Error("No ships to remove")
       }
