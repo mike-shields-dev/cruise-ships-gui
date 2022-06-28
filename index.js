@@ -15,7 +15,7 @@ const messageEl = document.querySelector("#message")
 
 addPortButton.addEventListener("click", (e) => {
   e.preventDefault()
-  const portName = form.port.value
+  const portName = bookingForm.port.value
     .toLowerCase()
     .split(" ")
     .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
