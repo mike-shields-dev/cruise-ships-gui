@@ -135,7 +135,8 @@ form input {
 }
 
 #ports {
-  width: 0px;
+  position: absolute;
+  width: var(--portsElWidth);
   height: 32px;
   margin-top: 96px;
   display: flex;
