@@ -18,7 +18,7 @@
   <header>
     <form>
       <label for="port">Add Port</label>
-      <input type="text" name="port" placeholder="Port Name">
+      <input id="port-input" type="text" name="port" placeholder="Port Name">
       <div id="form-buttons">
         <button id="add-port-button">Add</button>
         <button id="book-button" type="submit">Book</button>
@@ -28,8 +28,8 @@
     </form>
 
     <div id="journey-status">
-      <p>Current Port: <span id="current-port"></span></p>
-      <p>Next Port: <span id="next-port"></span></p>
+      <p>Current Port: <span id="current-port-display"></span></p>
+      <p>Next Port: <span id="next-port-display"></span></p>
     </div>
 
   </header>
