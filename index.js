@@ -6,6 +6,12 @@ const bookingForm = document.querySelector("form")
 const addPortButton = document.querySelector("#add-port-button")
 const itineraryListEl = document.querySelector("#itinerary-list")
 const portsEl = document.querySelector("#ports")
+const shipEl = createShipElement()
+const sailBttn = document.querySelector("#sail-button")
+const currentPortDisplayEl = document.querySelector("#current-port-display")
+const nextPortDisplayEl = document.querySelector("#next-port-display")
+const viewportEl = document.querySelector("#viewport")
+const messageEl = document.querySelector("#message")
 
 addPortButton.addEventListener("click", (e) => {
   e.preventDefault()
@@ -41,7 +47,16 @@ bookingForm.addEventListener("submit", (e) => {
   portsEl.innerHTML = ""
   itinerary = new Itinerary(portNames.map((portName) => new Port(portName)))
   ship = new Ship(itinerary)
-  controller = new Controller(ship)
+
+  controller = new Controller({
+    ship,
+    shipEl,
+    sailBttn,
+    currentPortDisplayEl,
+    nextPortDisplayEl,
+    viewportEl,
+    messageEl,
+  })
 
   controller.renderPorts(itinerary.ports)
   controller.positionShip(ship)
