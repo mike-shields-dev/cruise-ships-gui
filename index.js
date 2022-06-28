@@ -6,7 +6,6 @@ const bookingForm = document.querySelector("form")
 const addPortButton = document.querySelector("#add-port-button")
 const itineraryListEl = document.querySelector("#itinerary-list")
 const portsEl = document.querySelector("#ports")
-const shipEl = createShipElement()
 const sailBttn = document.querySelector("#sail-button")
 const currentPortDisplayEl = document.querySelector("#current-port-display")
 const nextPortDisplayEl = document.querySelector("#next-port-display")
@@ -50,7 +49,6 @@ bookingForm.addEventListener("submit", (e) => {
 
   controller = new Controller({
     ship,
-    shipEl,
     sailBttn,
     currentPortDisplayEl,
     nextPortDisplayEl,
