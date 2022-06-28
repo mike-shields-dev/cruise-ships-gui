@@ -147,6 +147,11 @@ form input {
   background-image: url("../images/port.png");
 }
 
+#ship-container {
+  position: absolute;
+  top: 100px;
+}
+
 #ship {
   width: 128px;
   height: 64px;
