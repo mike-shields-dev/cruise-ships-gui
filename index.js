@@ -59,5 +59,6 @@ bookingForm.addEventListener("submit", (e) => {
   })
 
   controller.renderPorts(itinerary.ports)
-  controller.positionShip(ship)
+  controller.renderShipEl()
+  controller.moveShipEl()
 })
