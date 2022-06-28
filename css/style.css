@@ -106,6 +106,33 @@ form input {
   scrollbar-width: none; /* Firefox */
 }
 
+#shark {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  transform: scale(-1, 1)
+}
+
+#shark-inner {
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/shark.gif');
+  background-size: 100% 100%;
+}
+
+.swimming {
+  animation: swimming 60s infinite linear;
+}
+
+@keyframes swimming {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(var(--portsElWidth));
+  }
+}
+
 #ports {
   width: 0px;
   height: 32px;
