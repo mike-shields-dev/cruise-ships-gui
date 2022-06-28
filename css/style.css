@@ -3,7 +3,7 @@
   --portsElWidth: 0;
   --rocker-angle: 3deg;
   --bobber-distance: 2px;
-  --shifter-distance: 2px;
+  --shifting-distance: 4px;
 }
 
 body {
