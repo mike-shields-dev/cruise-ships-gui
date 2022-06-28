@@ -13,11 +13,7 @@
         throw new Error("The ship is not docked")
       }
 
-      const hasNextPort =
-        this.itinerary.ports.indexOf(this.currentPort) + 1 <
-        this.itinerary.ports.length
-
-      if (!hasNextPort) {
+      if (this.hasCompletedItinerary) {
         throw new Error("The ship has arrived at its final destination")
       }
 
@@ -30,17 +26,19 @@
         throw new Error("Ship is already docked")
       }
 
+      if (this.hasCompletedItinerary) {
+        throw new Error("The ship has arrived at its final destination")
+      }
+
       const indexOfPreviousPort = this.itinerary.ports.indexOf(
         this.previousPort
       )
-      const indexOfNextPort = indexOfPreviousPort + 1
-      const hasNextPort = indexOfNextPort < this.itinerary.ports.length
 
-      if (!hasNextPort) {
-        throw new Error("The ship has arrived at its final destination")
-      }
+      const indexOfNextPort = indexOfPreviousPort + 1
       this.currentPort = this.itinerary.ports.at(indexOfNextPort)
       this.currentPort.addShip(this)
+
+      this.hasCompletedItinerary = this.itinerary.ports.length - indexOfNextPort <= 0
     }
   }
 
