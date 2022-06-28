@@ -1,8 +1,8 @@
 :root {
   --viewport-width: 640px;
   --portsElWidth: 0;
-  --rocker-angle: 3deg;
-  --bobber-distance: 2px;
+  --rocking-angle: 3deg;
+  --bobbing-distance: 2px;
   --shifting-distance: 4px;
 }
 
@@ -167,34 +167,31 @@ form input {
   background-image: url("../images/ship.png");
 }
 
-.rock {
+.rocking {
   transform-origin: center;
-  animation: rocker 2s infinite ease-in-out calc(2s / 3);
+  animation: rocking 2s infinite ease-in-out calc(2s / 3);
+}
+@keyframes rocking {
+  0%   { transform: rotate(var(--rocking-angle)) }
+  50%  { transform: rotate(calc(-1 * var(--rocking-angle))) }
+  100% { transform: rotate(var(--rocking-angle)) }
 }
 
-@keyframes rocker {
-  0%   { transform: rotate(var(--rocker-angle)) }
-  50%  { transform: rotate(calc(-1 * var(--rocker-angle))) }
-  100% { transform: rotate(var(--rocker-angle)) }
+.bobbing { 
+  animation: bobbing 2s infinite ease-in-out;
 }
-
-.bob { 
-  animation: bobber 2s infinite ease-in-out;
-}
-
-@keyframes bobber {
+@keyframes bobbing {
   0%   { transform: translateY(0px) }
-  50%  { transform: translateY(var(--bobber-distance)) }
+  50%  { transform: translateY(var(--bobbing-distance)) }
   100% { transform: translateY(0px) }
 }
 
-.shift {
-  animation: shifter 5s infinite ease-in-out;
+.shifting {
+  animation: shifting 5s infinite ease-in-out;
 }
-
-@keyframes shifter {
+@keyframes shifting {
   0%   { transform: translateX(0px) }
-  50%  { transform: translateX(var(--shifter-distance)) }
+  50%  { transform: translateX(var(--shifting-distance)) }
   100% { transform: translateX(0px) }
 }
 
